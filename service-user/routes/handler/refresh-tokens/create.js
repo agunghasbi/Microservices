@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
     const user = User.findByPk(userId);
     if (!user) {
-        return res.status(400).json({
+        return res.status(404).json({
             status: 'error',
             message: 'user not found'
         });
