@@ -11,10 +11,10 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::query();
         return response()->json([
             'status' => 'success',
-            'data' => $courses
+            'data' => $courses->paginate(10)
         ]);
     }
 
