@@ -9,9 +9,21 @@ use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::query();
+
+        $q = $request->query('q');
+        $status = $request->query('status');
+
+        $courses->when($q, function ($query) use ($q) {
+            return $query->whereRaw("name LIKE '%" . strtolower($q) . "%'");
+        });
+
+        $courses->when($status, function ($query) use ($status) {
+            return $query->where("status", "=", $status);
+        });
+
         return response()->json([
             'status' => 'success',
             'data' => $courses->paginate(10)
@@ -108,6 +120,21 @@ class CourseController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $course
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $course = Course::find($id);
+        if (!$course) {
+            return response()->json(['status' => 'error', 'message' => 'course not found'], 404);
+        }
+
+        $course->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'course deleted'
         ]);
     }
 }
