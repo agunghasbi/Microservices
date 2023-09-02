@@ -10,7 +10,7 @@ class Review extends Model
     protected $table = 'reviews';
 
     protected $fillable = [
-        'course_id', 'user_id', 'rating', ' note'
+        'course_id', 'user_id', 'rating', 'note'
     ];
 
     protected $casts = [
