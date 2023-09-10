@@ -144,16 +144,16 @@ class CourseController extends Controller
             ], 404);
         }
 
-        $mentorId = $request->input('mentor_id');
-        if (!$mentorId) {
-            $mentor = Mentor::find($mentorId);
-            if (!$mentor) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'mentor not found'
-                ], 404);
-            }
-        }
+        // $mentorId = $request->input('mentor_id');
+        // if (!$mentorId) {
+        //     $mentor = Mentor::find($mentorId);
+        //     if (!$mentor) {
+        //         return response()->json([
+        //             'status' => 'error',
+        //             'message' => 'mentor not found'
+        //         ], 404);
+        //     }
+        // }
 
         $course->fill($data);
         $course->save();

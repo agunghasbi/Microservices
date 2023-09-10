@@ -7,7 +7,8 @@ const api = apiAdapter(URL_SERVICE_COURSE);
 
 module.exports = async (req, res) => {
     try {
-        const course = await api.post('/api/courses', req.body);
+        const id = req.params.id;
+        const course = await api.delete(`/api/courses/${id}`);
         return res.json(course.data);
     } catch (error) {
         console.log(error);
