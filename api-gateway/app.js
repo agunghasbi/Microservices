@@ -17,7 +17,6 @@ const mentorsRouter = require('./routes/mentors');
 const verifyToken = require('./middlewares/verifyToken');
 
 const app = express();
-//
 
 app.use(logger('dev'));
 app.use(express.json({ limit: "50mb" }));
